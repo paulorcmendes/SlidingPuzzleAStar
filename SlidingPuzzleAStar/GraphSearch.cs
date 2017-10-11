@@ -93,14 +93,7 @@ namespace SlidingPuzzleAStar
                 node.Neighbors.Add(new Neighbor(new Node(newState, Program.GetExpectation(newState, goalState.State)), 1));
             }
         }
-        private static bool IsInTheBorder(Node node, List<Path> border)
-        {
-            foreach (Path path in border)
-            {
-                if (path.Equals(node)) return true;
-            }
-            return false;
-        }
+        
         public static int[] North(int[] state, int zPos) {
             int[] newState = null;
             if ((zPos/3) > 0) {
