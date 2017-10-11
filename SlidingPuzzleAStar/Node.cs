@@ -10,18 +10,18 @@ namespace SlidingPuzzleAStar
     class Node
     {
         private List<Neighbor> neighbors;
-        private String name;
+        private int[] state;
         private int expectation;
 
-        public Node(String name)
+        public Node(int[] state)
         {
-            this.Name = name;
+            this.State = state;
             this.neighbors = new List<Neighbor>();
             this.expectation = 0;
         }
-        public Node(String name, int expectation)
+        public Node(int[] state, int expectation)
         {
-            this.Name = name;
+            this.State = state;
             this.neighbors = new List<Neighbor>();
             this.Expectation = expectation;
         }
@@ -35,15 +35,15 @@ namespace SlidingPuzzleAStar
                 expectation = value;
             }
         }
-        public String Name
+        public int[] State
         {
             get
             {
-                return this.name;
+                return this.state;
             }
             set
             {
-                this.name = value;
+                this.state = value;
             }
         }
         public List<Neighbor> Neighbors
@@ -53,9 +53,27 @@ namespace SlidingPuzzleAStar
                 return this.neighbors;
             }
         }
+        public static string ShowPuzzle(int[] puzzle)
+        {
+            if (puzzle == null) return null;
+            string msg = "";
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    msg += (puzzle[i * 3 + j] == 0 ? "  |" : puzzle[i * 3 + j] + " |");
+                }
+                msg += "\n";
+            }
+            return msg+"\n\n";
+        }
         public override String ToString()
         {
-            return Name;
+            return ShowPuzzle(this.State);
+        }
+        public override bool Equals(object obj)
+        {
+            return State.SequenceEqual(((Node)obj).State);
         }
     }
 }
