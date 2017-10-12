@@ -19,17 +19,24 @@ namespace SlidingPuzzleAStar
         } 
         static void Main(string[] args)
         {
-            int[] init = {5, 1, 4,
-                          7, 0, 6,
-                          2, 8, 3};
+            int[] init = {7, 5, 0,
+                          1, 8, 3,
+                          4, 2, 6};
             int[] final = {0, 1, 2,
                            3, 4, 5,
                            6, 7, 8};
             Node n1 = new Node(init, GetExpectation(init, final));
             Node n2 = new Node(final, 0);
 
-
-            Console.Write(GraphSearch.AStarSearch(n2, n1));
+            Path path = GraphSearch.AStarSearch(n1, n2);
+            if (path != null)
+            {
+                Console.Write(path);
+            }
+            else
+            {
+                Console.WriteLine("Path not found :(");
+            }
             Console.ReadKey();
         }        
     }
