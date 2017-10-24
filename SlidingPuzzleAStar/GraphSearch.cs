@@ -11,17 +11,19 @@ namespace SlidingPuzzleAStar
         public static Path AStarSearch(Node initial, Node goal)
         {
             bool found;
-            Path initialState = new Path(initial, 0, CATEGORY.A_STAR);
-            Node goalState = goal;
 
             //defining initial and final states
-            List<Path> border = new List<Path>();
-            List<Node> explored = new List<Node>();
+            Path initialState = new Path(initial, 0, CATEGORY.A_STAR);
+            Node goalState = goal;
+                        
+            List<Path> border = new List<Path>(); //border
+            List<Node> explored = new List<Node>(); //set of explored nodes
 
             //adding initial state to the border
             border.Add(initialState);
             found = false;
             Path currentNode = null; //current node being explored
+            
             while (!found)
             {
                 if (border.Count == 0)
@@ -56,21 +58,22 @@ namespace SlidingPuzzleAStar
                         newPath.PathToMe = currentNode.PathToMe.ToList();
                         newPath.PathToMe.Add(currentNode.Node);
 
-
+                        //removing a path from the border if it costs more than me
+                        int index = border.IndexOf(newPath);
+                        if (index != -1 && newPath.CompareTo(border[index]) < 0)
+                        {
+                            border.RemoveAt(index);
+                        }
+                        //adding the current node to the border
                         border.Add(newPath);
                         border.Sort();
-                        //foreach (Path p in border)
-                        //{
-                        //    Console.Write(p.Node + " c:" + p.Cost + " e:" + p.Node.Expectation + "s: " + (p.Cost + p.Node.Expectation) + "; ");
-                        //}
-                        //Console.WriteLine();
-                        //Console.ReadKey();
                     }
                 }
             }
             if (found) return currentNode;
             return null;
         }
+        //exploring the possible neighbors of a node
         private static void AddNeighbors(Node node, int zPos, Node goalState) {
             int[] newState;
             if (zPos / 3 > 0) {
@@ -93,7 +96,7 @@ namespace SlidingPuzzleAStar
                 node.Neighbors.Add(new Neighbor(new Node(newState, Program.GetExpectation(newState, goalState.State)), 1));
             }
         }
-        
+        //return the state resultant of moving the blank space to the north
         public static int[] North(int[] state, int zPos) {
             int[] newState = null;
             if ((zPos/3) > 0) {
@@ -103,6 +106,7 @@ namespace SlidingPuzzleAStar
             }
             return newState;
         }
+        //return the state resultant of moving the blank space to the south
         public static int[] South(int[] state, int zPos)
         {
             int[] newState = null;
@@ -114,6 +118,7 @@ namespace SlidingPuzzleAStar
             }
             return newState;
         }
+        //return the state resultant of moving the blank space to the east
         public static int[] East(int[] state, int zPos)
         {
             int[] newState = null;
@@ -125,6 +130,7 @@ namespace SlidingPuzzleAStar
             }
             return newState;
         }
+        //return the state resultant of moving the blank space to the west
         public static int[] West(int[] state, int zPos)
         {
             int[] newState = null;

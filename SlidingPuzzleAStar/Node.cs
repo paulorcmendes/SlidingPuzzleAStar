@@ -11,7 +11,7 @@ namespace SlidingPuzzleAStar
     {
         private List<Neighbor> neighbors;
         private int[] state;
-        private int expectation;
+        private int expectation; //manhatan distance
 
         public Node(int[] state)
         {
@@ -53,6 +53,7 @@ namespace SlidingPuzzleAStar
                 return this.neighbors;
             }
         }
+        //function just to show the current state in a fancy way
         public static string ShowPuzzle(int[] puzzle)
         {
             if (puzzle == null) return null;
