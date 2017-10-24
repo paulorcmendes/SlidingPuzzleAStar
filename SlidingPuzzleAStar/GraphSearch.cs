@@ -64,7 +64,7 @@ namespace SlidingPuzzleAStar
                         {
                             border.RemoveAt(index);
                         }
-                        //adding the current node to the border
+                        //adding the current neighbor to the border
                         border.Add(newPath);
                         border.Sort();
                     }

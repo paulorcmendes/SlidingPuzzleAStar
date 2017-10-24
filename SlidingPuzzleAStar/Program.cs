@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace SlidingPuzzleAStar
 {
+    //Developed by Paulo Renato Conceição Mendes
+    //Based on professor Bruno Feres' slides
+    //more info: https://github.com/paulorcmendes/SlidingPuzzleAStar
+    //based also on my implementation of the Romanian cities: 
     class Program
     {
         
