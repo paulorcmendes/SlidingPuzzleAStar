@@ -7,7 +7,7 @@ namespace SlidingPuzzleAStar
     //Developed by Paulo Renato Conceição Mendes
     //Based on professor Bruno Feres' slides
     //more info: https://github.com/paulorcmendes/SlidingPuzzleAStar
-    //based also on my implementation of the Romanian cities: 
+    //based also on my implementation of the Romanian cities: https://github.com/paulorcmendes/GraphSearchAlgorithms
     class Program
     {
         
