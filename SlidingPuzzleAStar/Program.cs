@@ -20,15 +20,34 @@ namespace SlidingPuzzleAStar
                 expec += Math.Abs(i % 3 - Array.IndexOf(final, init[i]) % 3); //i%3 = column
             }
             return expec;
-        } 
+        }
+        public static int[] ReadMatrix() {
+            int[] matrix;
+            matrix = new int[9];
+            matrix = matrix.Select(i => Int32.MinValue).ToArray();
+            for (int i = 0; i < 9; i++)
+            {                
+                int aux;
+                Console.Write("Position({0}, {1}): ", i / 3, i % 3);
+                aux = Convert.ToInt32(Console.ReadLine());
+                while (matrix.Contains(aux) || aux < 0 || aux > 8) {
+                    Console.Beep();
+                    Console.WriteLine("Invalid value, try again!!");
+                    Console.Write("Position({0}, {1}): ", i / 3, i % 3);
+                    aux = Convert.ToInt32(Console.ReadLine());
+                }
+                matrix[i] = aux;
+            }
+            return matrix;
+        }
         static void Main(string[] args)
         {
-            int[] init = {0, 1,2,
-                          3, 4, 5,
-                          6, 7, 8};
-            int[] final ={8, 7,6,
-                          5, 4, 3,
-                          2, 1, 0};
+            Console.WriteLine("Use 0 for the blank space\n\nInsert values for the initial state: ");
+            int[] init = ReadMatrix();
+            Console.WriteLine("Insert values for goal state: ");
+            int[] final = ReadMatrix();
+            //Console.Clear();
+            Console.WriteLine("\n######### Result ##########");
             Node n1 = new Node(init, GetExpectation(init, final));
             Node n2 = new Node(final, 0);
 
